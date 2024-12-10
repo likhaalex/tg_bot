@@ -5,11 +5,11 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 import asyncio
 
-# Получение токенов из переменных окружения
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
-CAT_API_KEY = os.getenv("CAT_API_KEY")
+# Получение токена из переменных окружения
+TOKEN = os.getenv("TOKEN")
+CAT_API_KEY = 'live_SpFC9IGnt7ZLngd6kpUqJKPh7xmshP1u9jhf1owOXqOHn1lTCxnDJLxGkzutzdFO'  # Укажите свой API ключ
 
-bot = Bot(TELEGRAM_TOKEN)
+bot = Bot(TOKEN)
 dp = Dispatcher()
 
 # Словарь для хранения состояний пользователей
@@ -19,9 +19,8 @@ user_state = {}
 @dp.message(Command('start'))
 async def send_welcome(message: types.Message):
     await message.answer("Привет! Я твой Telegram-бот. "
-                         "Давай поговорим! Чем я могу помочь?\n\n"
-                         
-                         "/help - Список доступных команд и фраз\n")
+                         "Давай поговорим! Чем я могу помочь? "
+                         "Например, скажи 'покажи кошку', если хочешь увидеть рандомную фотографию кошки.")
 
 # Получение случайной фотографии кошки через API
 async def get_cat_image():
@@ -36,17 +35,6 @@ async def get_cat_image():
                 return data[0]["url"]
             else:
                 return None
-
-# Команда /help для вывода доступных фраз
-@dp.message(Command('help'))
-async def send_help(message: types.Message):
-    await message.answer("Вот что я могу: \n\n"
-                         "/help - Список команд\n"
-                         "Покажи кошку - Я покажу тебе фото кошки\n"
-                         "Как дела? - Узнаешь, как у меня дела\n"
-                         "Помоги мне - Я помогу тебе\n"
-                         "Пока - Прощание\n\n"
-                         "Напиши любую из этих фраз, и я отреагирую!")
 
 # Обработка сообщения 'покажи кошку'
 @dp.message()
