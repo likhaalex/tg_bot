@@ -19,8 +19,9 @@ user_state = {}
 @dp.message(Command('start'))
 async def send_welcome(message: types.Message):
     await message.answer("Привет! Я твой Telegram-бот. "
-                         "Давай поговорим! Чем я могу помочь? "
-                         "Например, скажи 'покажи кошку', если хочешь увидеть рандомную фотографию кошки.")
+                         "Давай поговорим! Чем я могу помочь?\n\n"
+                         
+                         "/help - Список доступных команд и фраз\n")
 
 # Команда /help для вывода доступных фраз
 @dp.message(Command('help'))
