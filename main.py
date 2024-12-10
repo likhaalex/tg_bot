@@ -1,7 +1,7 @@
 import os
+import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
-import asyncio
 
 # Получение токена из переменных окружения
 TOKEN = os.getenv("TOKEN")
@@ -9,39 +9,43 @@ TOKEN = os.getenv("TOKEN")
 bot = Bot(TOKEN)
 dp = Dispatcher()
 
-# Словарь для хранения состояний пользователей
-user_state = {}
-
 # Приветственное сообщение
 @dp.message(Command('start'))
 async def send_welcome(message: types.Message):
     await message.answer("Привет! Я твой Telegram-бот. "
                          "Давай поговорим! Чем я могу помочь? "
-                         "Например, скажи 'расскажи анекдот', если хочешь, чтобы я рассказал анекдот.")
+                         "Например, скажи 'расскажи анекдот', если хочешь, чтобы я рассказал анекдот.\n\n"
+                         "Если ты не знаешь, что сказать, попробуй одну из этих команд:\n"
+                         "/help - Список доступных команд и фраз\n"
+                         "расскажи анекдот - Я расскажу тебе анекдот\n"
+                         "как дела? - Узнаешь, как у меня дела\n"
+                         "помоги мне - Я помогу тебе\n"
+                         "пока - Прощание")
+
+# Команда /help для вывода доступных фраз
+@dp.message(Command('help'))
+async def send_help(message: types.Message):
+    await message.answer("Вот что я могу: \n\n"
+                         "/help - Список команд\n"
+                         "расскажи анекдот - Я расскажу тебе анекдот\n"
+                         "как дела? - Узнаешь, как у меня дела\n"
+                         "помоги мне - Я помогу тебе\n"
+                         "пока - Прощание\n\n"
+                         "Напиши любую из этих фраз, и я отреагирую!")
 
 # Обработка всех сообщений
 @dp.message()
 async def handle_message(message: types.Message):
     text = message.text.lower()
 
-    # Проверка на ключевое слово
     if text == 'расскажи анекдот':
         await message.answer("Вот анекдот: \n\nКакой металл самый веселый? — Смехолёт!")
-        await message.answer("Хочешь поговорить о чем-то еще?")
-        user_state[message.from_user.id] = 'waiting_for_next_message'
     elif text == 'как дела?':
         await message.answer("Все хорошо! А у тебя как?")
-        user_state[message.from_user.id] = 'waiting_for_next_message'
     elif text == 'помоги мне':
         await message.answer("Как я могу помочь? Расскажи, что нужно.")
-        user_state[message.from_user.id] = 'waiting_for_help_request'
-    elif message.from_user.id in user_state and user_state[message.from_user.id] == 'waiting_for_help_request':
-        await message.answer(f"Ты попросил помочь с: {message.text}. "
-                             "Попробуй еще уточнить, что именно нужно сделать!")
-        user_state[message.from_user.id] = 'waiting_for_next_message'
     elif text == 'пока':
         await message.answer("Пока! Надеюсь, еще пообщаемся!")
-        user_state[message.from_user.id] = 'waiting_for_next_message'
     else:
         await message.answer(f"Ты написал: {message.text}. Продолжай общаться, я всегда на связи!")
 
