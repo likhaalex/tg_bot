@@ -61,7 +61,7 @@ async def handle_message(message: types.Message):
         else:
             await message.answer("Не удалось найти кошку. Попробуй позже.")
     elif text == 'как дела?':
-        await message.answer("Все хорошо! А у тебя как?")
+        await message.answer("У меня всё отлично!!")
     elif text == 'помоги мне':
         await message.answer("Как я могу помочь? Расскажи, что нужно.")
     elif text == 'пока':
