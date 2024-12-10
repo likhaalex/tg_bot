@@ -22,6 +22,17 @@ async def send_welcome(message: types.Message):
                          "Давай поговорим! Чем я могу помочь? "
                          "Например, скажи 'покажи кошку', если хочешь увидеть рандомную фотографию кошки.")
 
+# Команда /help для вывода доступных фраз
+@dp.message(Command('help'))
+async def send_help(message: types.Message):
+    await message.answer("Вот что я могу: \n\n"
+                         "/help - Список команд\n"
+                         "Покажи кошку - Я покажу тебе фото кошки\n"
+                         "Как дела? - Узнаешь, как у меня дела\n"
+                         "Помоги мне - Я помогу тебе\n"
+                         "Пока - Прощание\n\n"
+                         "Напиши любую из этих фраз, и я отреагирую!")
+
 # Получение случайной фотографии кошки через API
 async def get_cat_image():
     url = "https://api.thecatapi.com/v1/images/search"
