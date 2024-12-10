@@ -30,7 +30,7 @@ async def send_help(message: types.Message):
                          "/help - Список команд\n"
                          "Покажи кошку - Я покажу тебе фото кошки\n"
                          "Как дела? - Узнаешь, как у меня дела\n"
-                         "Помоги мне - Я помогу тебе\n"
+                         "Поддержи меня - Скажу добрые слова\n"
                          "Пока - Прощание\n\n"
                          "Напиши любую из этих фраз, и я отреагирую!")
 
@@ -62,8 +62,8 @@ async def handle_message(message: types.Message):
             await message.answer("Не удалось найти кошку. Попробуй позже.")
     elif text == 'как дела?':
         await message.answer("У меня всё отлично!!")
-    elif text == 'помоги мне':
-        await message.answer("Как я могу помочь? Расскажи, что нужно.")
+    elif text == 'поддержи меня':
+        await message.answer("Ты обязательно со всем справишься, не расстраивайся и не опускай руки!!")
     elif text == 'пока':
         await message.answer("Пока! Надеюсь, еще пообщаемся!")
     else:
