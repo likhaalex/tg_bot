@@ -6,7 +6,7 @@ from aiogram.filters import Command
 import asyncio
 
 TOKEN = os.getenv("TOKEN")
-CAT_API_KEY = 'live_SpFC9IGnt7ZLngd6kpUqJKPh7xmshP1u9jhf1owOXqOHn1lTCxnDJLxGkzutzdFO'
+CAT_API_KEY = 'CAT_API_KEY'
 
 bot = Bot(TOKEN)
 dp = Dispatcher()
@@ -75,4 +75,5 @@ async def main():
 
 if __name__ == '__main__':
     asyncio.run(main())
+
 
