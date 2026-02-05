@@ -5,9 +5,8 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 import asyncio
 
-# Получение токена из переменных окружения
 TOKEN = os.getenv("TOKEN")
-CAT_API_KEY = 'live_SpFC9IGnt7ZLngd6kpUqJKPh7xmshP1u9jhf1owOXqOHn1lTCxnDJLxGkzutzdFO'  # Укажите свой API ключ
+CAT_API_KEY = 'live_SpFC9IGnt7ZLngd6kpUqJKPh7xmshP1u9jhf1owOXqOHn1lTCxnDJLxGkzutzdFO'
 
 bot = Bot(TOKEN)
 dp = Dispatcher()
@@ -76,3 +75,4 @@ async def main():
 
 if __name__ == '__main__':
     asyncio.run(main())
+
